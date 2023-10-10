@@ -3,6 +3,7 @@ package com.bima.mysound
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val btnSound = findViewById<Button>(R.id.btn_sound_pool)
 
         sp = SoundPool.Builder()
             .setMaxStreams(10)
@@ -28,5 +31,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         soundId = sp.load(this, R.raw.clinking_glasses, 1)
+
+        btnSound.setOnClickListener {
+            if (spLoaded) {
+                sp.play(soundId, 1f, 1f, 0, 0, 1f)
+            }
+        }
     }
 }
